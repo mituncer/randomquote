@@ -179,12 +179,6 @@ const removeTodoItem = (index) => {
   });
 
 
-const closeTab = () => {
-  window.close();
-};
-
-
-
 // Add event listener to the close button
 const closeButton = document.getElementById('closeButton');
 closeButton.addEventListener('click', closeTab);
