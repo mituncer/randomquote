@@ -62,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
 // Function to navigate to the revision page
 const navigateToRevisionPage = () => {
   window.location.href = 'revList.html';
@@ -75,11 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTodos();
 });
 
-// Display the random item on the landing page
-document.addEventListener('DOMContentLoaded', () => {
-  randomItemDisplay.textContent = getRandomItem();
-  fetchRandomQuote();
-});
 
 
 const getTodos = () => {
