@@ -6,26 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tavsiye listesinde</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    
-/* CSS styles for the todo items and remove button *
-.todo-item {
-  display: flex;
-  align-items: flex-start;  Align items to the top 
-}
 
-.todo-item-text {
-  flex-grow: 1;
-  text-align: left; /* Align the text to the left 
-  word-break: break-all; /* Break words to multiple lines 
-}
-
-.remove-button {
-  margin-left: 10px;
-}*/
-
-
-  </style>
 </head>
 <body>
   <div class="container">
@@ -35,7 +16,7 @@
     <button id="saveButton">Save</button>
     <ul id="todoList"></ul>
     <button id="returnButton">Return</button>
-    <button id="closeButton">Close</button>
+    <button type="button" onclick="javascript:window.close()">Close Tab</button>
   </div>
   <script src="index.js"></script>
 </body>
