@@ -16,7 +16,7 @@ const getRandomItem = () => {
   let todos = JSON.parse(localStorage.getItem('todos'));
 
   if (!todos || todos.length === 0) {
-    return 'No items found'; // Return a message if there are no items
+    return 'No items found. Go to "Edit / Remove" button to add item'; // Return a message if there are no items
   }
 
   // Generate a random index within the range of the todos array
