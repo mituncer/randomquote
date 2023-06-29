@@ -12,25 +12,25 @@
 </head>
 <body>
 
-
-
-
   <div class="container">
-    <h3>Random Quotes of the day<br></h3>
-    <div style= "color : rgb(136, 116, 116)" class="heading" id="randomItemDisplay"></div>
+    <h3>Self Note<br></h3>
+    <div style="color: rgb(136, 116, 116)" class="heading" id="randomItemDisplay"></div>
+    <h4 style="font-size: 75%" id='keepText'></h4>
     <p> <br><br></p>
-    <div class="heading" id="randomItemDisplay"></div>
+
+    <h3>Random Quote of the day<br></h3>
     <h2 id="quoteDisplay"></h2>
-
     <p> <br><br></p>
-    <button id="newQuoteButton">New Quote</button>
-    <button onclick="navigateToRevisionPage()">Edit / Remove</button>
 
-    <button type="button" onclick="javascript:window.close()">Close Tab</button>
+
+    <button id="newQuoteButton">New Quote</button>
+    <button type="button" id="myButt1" onclick = "keepIdea()" ></button> 
+    <button onclick="navigateToRevisionPage()">Add / Remove</button>
+    <button id="closeButton">Close Tab</button>
+    <button type="button" onclick="javascript:window.close()">Discard</button>
   </div>
 
 
-  <script src="index.js">"getQuote()"</script>
-
+  <script src="index.js"></script>
 </body>
 </html>
