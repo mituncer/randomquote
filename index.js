@@ -26,12 +26,7 @@ if (localStorage.getItem('keeptheIdea') === null) {
 
 } else {
   keepOrNot = localStorage.getItem('keeptheIdea');
-//  if (keepOrNot=="yes") {
-//    document.getElementById("myButt1").innerHTML="Revolve Idea";
-//  } else {
-//    document.getElementById("myButt1").innerHTML="Keep Idea";
-//  }
-  
+ 
 }
 
 
