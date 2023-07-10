@@ -102,7 +102,7 @@ const getRandomItem = () => {
   let todos = JSON.parse(localStorage.getItem('todos'));
 
   if (!todos || todos.length === 0) {
-    return 'No items found. Click "Edit/Delete" button to add items.'; // Return a message if there are no items
+    return 'No items found. Click "Add / Remove" button to add items.'; // Return a message if there are no items
   }
 
   var kontrol = ((tarihRead.toString() == tarih.toString()) && keepOrNot=="yes");
