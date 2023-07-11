@@ -1,0 +1,14 @@
+The web application consists of two main pages: the landing page (index.html) and the revision page (revlist.html).
+
+On the landing page, users can input their own quotes or tasks, and each day a random item from the inputted list is displayed. 
+Users have the option to either keep the displayed item throughout the day or rotate to a new item. 
+Additionally, a random quote is shown from the web to provide daily inspiration.
+
+The revision page allows users to manage their notes and ideas. 
+Users can add new items to the list, remove existing items, and view a randomly selected note at the top of the container.
+
+The JavaScript files (index.js and revlist.js) provide the functionality for retrieving and saving data in local storage, generating random items, 
+rendering the lists, and handling user interactions.
+
+Together, these components create a web application that helps users manage their self notes, ideas, and daily inspirations, 
+providing an organized and dynamic experience.
