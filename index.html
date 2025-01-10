@@ -1,36 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote and Market Hours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            margin-bottom: 50px;
+        }
+        .frame {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            width: 75%;
+            height: 250px;
+            margin: 0 auto;
+        }
+        .time-bar {
+            position: relative;
+            width: 90%;
+            height: 30px;
+            background: #34495e;
+            margin: 20px auto;
+            border: 1px solid #bdc3c7;
+        }
+        .highlight {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: rgba(46, 204, 113, 0.3);
+        }
+        .highlight-next-day {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: rgba(46, 204, 113, 0.3);
+        }
+        .line {
+            position: absolute;
+            top: -10px;
+            bottom: -50px;
+            width: 2px;
+        }
+        .local-time {
+            background: #FFD580;
+            z-index: 10;
+            position: relative;
+        }
+        .market-time {
+            background: #2ecc71;
+        }
+        .label {
+            position: absolute;
+            top: 30px;
+            font-size: 0.9em;
+            color: #ecf0f1;
+            white-space: nowrap;
+        }
+        .time-label {
+            position: absolute;
+            top: 50px;
+            font-size: 0.9em;
+            color: #ecf0f1;
+            white-space: nowrap;
+        }
+        h1, h3 {
+            color: #2c3e50;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h3>Self Note/Ideas<br></h3>
+<div class="container">
+    <h3>Self Note/Ideas</h3>
     <div style="color: rgb(136, 116, 116)" class="heading" id="randomItemDisplay"></div>
-    <h4 style="font-size: 75%" id='keepText'></h4>
-    <p> <br><br></p>
+    <h4 style="font-size: 75%" id="keepText"></h4>
 
-    <h3>Random Quote of the day<br></h3>
+    <h3>Random Quote of the Day</h3>
     <h2 id="quoteDisplay"></h2>
-    <p> <br><br></p>
-
-
     <button id="newQuoteButton">New Quote</button>
-    <button type="button" id="myButt1" onclick = "keepIdea()" ></button> 
+    <button type="button" id="myButt1" onclick="keepIdea()">Keep Idea</button> 
     <button onclick="navigateToRevisionPage()">Add / Remove</button>
-
     <button type="button" onclick="javascript:window.close()">Discard</button>
-  </div>
+</div>
 
+<div class="frame">
+    <h1>Market Hours</h1>
+    <p id="local-time">Detecting your local time...</p>
 
-  <script src="index.js"></script>
-</body>
-</html>
+    <div class="time-bar" id="time-bar">
+        <div class="highlight" id="market-highlight"></div>
+        <div class="highlight-next-day" id="market-highlight-next"></div>
+        <div class="line local-time" id="local-time-line"></div>
+        <div class="label" id="local-time-label"></div>
+        <div class="line market-time" id="market-open-line"></div>
+        <div class="label" id="market-open-label">New York Opens</div>
+        <div class="time-label" id="market-open-time"></div>
+        <div class="line market-time" id="market-close-line"></div>
+        <div class="label" id="market-close-label">New York Closes</div>
+        <div class="time-label" id="market-close-time"></div>
+    </div>
+
+    <div class="time-bar" id="bist-time-bar">
+        <div class="highlight" id="bist-highlight"></div>
+        <div class="highlight-next-day" id="bist-highlight-next"></div>
+        <div class="line market-time" id="bist-open-line"></div>
+        <div class="label" id="bist-open-label">BIST Opens</div>
+        <div class="time-label" id="bist-open-time"></div>
+        <div class="line market-time" id="bist-close-line"></div>
+        <div class="label" id="bist-close-label">BIST Closes</div>
+        <div class="time-label" id="bist-close-time"></div>
+    </div>
+</div>
+
+<script>
+    function getRandomQuote() {
+        const quotes = ["Stay hungry, stay foolish.", "The only way to do great work is to love what you do.", "Success is not the key to happiness. Happiness is the key to success."];
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        document.getElementById("quoteDisplay").textContent = quotes[randomIndex];
+    }
+
+    function keepIdea() {
+        alert("Idea saved.");
+    }
+
+    function navigateToRevisionPage() {
+        alert("Navigating to revision page.");
+    }
+
+    function displayLocalTime() {
+        const now = new Date();
+        const localTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('local-time').textContent = `Your local time: ${localTime} (${timeZone})`;
+    }
+
+    function displayMarketHours() {
+        const nyOpenUTC = new Date();
+        nyOpenUTC.setUTCHours(14, 30, 0, 0);
+        const nyCloseUTC = new Date();
+        nyCloseUTC.setUTCHours(21, 0, 0, 0);
+        const bistOpenUTC = new Date();
+        bistOpenUTC.setUTCHours(7, 30, 0, 0);
+        const bistCloseUTC = new Date();
+        bistCloseUTC.setUTCHours(14, 0, 0, 0);
+
+        const localNYOpen = new Date(nyOpenUTC.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+        const localNYClose = new Date(nyCloseUTC.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+        const localBISTOpen = new Date(bistOpenUTC.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+        const localBISTClose = new Date(bistCloseUTC.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+
+        document.getElementById("market-open-time").textContent = localNYOpen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById("market-close-time").textContent = localNYClose.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById("bist-open-time").textContent = localBISTOpen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById("bist-close-time").textContent = localBISTClose.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    getRandomQuote();
+    displayLocalTime();
+    displayMarketHours();
+</script>
